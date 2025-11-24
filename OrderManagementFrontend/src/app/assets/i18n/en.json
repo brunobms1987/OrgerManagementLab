@@ -1,0 +1,40 @@
+{
+  "enums": {
+    "articleType": {
+      "PHYSICAL_PRODUCT": "Physical product",
+      "DIGITAL_PRODUCT": "Digital product"
+    }
+  },
+  "articles": {
+    "details": {
+      "title": "Article Details",
+      "name": "Article Name",
+      "articleNumber": "Article Number",
+      "type": "Article Type",
+      "description": "Article Description",
+      "id": "Article ID",
+      "edit": "Edit Article",
+      "editTitle": "Edit Article",
+      "save": "Save",
+      "cancel": "Cancel",
+      "updating": "Saving...",
+      "updateError": "Failed to save article"
+    },
+    "list": {
+      "title": "Articles",
+      "id": "ID",
+      "name": "Name",
+      "articleNumber": "Article Number",
+      "type": "Article Type",
+      "loading": "Loading articles...",
+      "no_articles": "No articles found"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "back": "Back"
+  }
+}

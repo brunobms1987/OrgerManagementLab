@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  test:
+    database:
+      replace: none
+  jpa:
+    hibernate:
+      ddl-auto: create
+  liquibase:
+    change-log: classpath:db/master.xml
+  main:
+    allow-bean-definition-overriding: true
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json

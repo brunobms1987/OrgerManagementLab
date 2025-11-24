@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ 'articles.details.editTitle' | translate }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+    <app-article-form-fields [form]="form" [types]="types" [error]="error"></app-article-form-fields>
+  </form>
+  
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()" [disabled]="saving">{{ 'articles.details.cancel' | translate }}</button>
+  <button mat-flat-button color="primary" type="submit" (click)="submit()" [disabled]="saving || form.invalid">
+    <span>{{ 'articles.details.save' | translate }}</span>
+    <mat-progress-spinner *ngIf="saving" diameter="16" mode="indeterminate"></mat-progress-spinner>
+  </button>
+</div>

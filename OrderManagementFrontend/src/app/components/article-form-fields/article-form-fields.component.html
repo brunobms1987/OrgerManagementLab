@@ -1,0 +1,25 @@
+<div [formGroup]="form">
+    <mat-form-field appearance="fill" class="full">
+        <mat-label>{{ 'articles.details.name' | translate }}</mat-label>
+        <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full">
+        <mat-label>{{ 'articles.details.articleNumber' | translate }}</mat-label>
+        <input matInput formControlName="articleNumber" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full">
+        <mat-label>{{ 'articles.details.type' | translate }}</mat-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let t of types" [value]="t">{{ ('enums.articleType.' + t) | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full">
+        <mat-label>{{ 'articles.details.description' | translate }}</mat-label>
+        <textarea matInput rows="4" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div *ngIf="error" class="error">{{ error | translate }}</div>
+</div>

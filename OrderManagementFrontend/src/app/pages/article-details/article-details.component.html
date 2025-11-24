@@ -1,0 +1,15 @@
+<div class="actions">
+  <a routerLink="/" class="back">{{ 'login.back' | translate }}</a>
+  <button mat-stroked-button color="primary" (click)="openEdit()"
+          *ngIf="canEdit() && article && !loading">{{ 'articles.details.edit' | translate }}</button>
+</div>
+<h1>{{ "articles.details.title" | translate }}</h1>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+<div *ngIf="article && !loading">
+  <div><strong>{{ "articles.details.name" | translate }}:</strong> {{ article.name }}</div>
+  <div><strong>{{ "articles.details.articleNumber" | translate }}:</strong> {{ article.articleNumber }}</div>
+  <div><strong>{{ "articles.details.type" | translate }}:</strong> {{ "enums.articleType." + article.type | translate }}</div>
+  <div><strong>{{ "articles.details.description" | translate }}:</strong> {{ article.description }}</div>
+  <div><strong>{{ "articles.details.id" | translate }}:</strong> {{ article.id }}</div>
+</div>

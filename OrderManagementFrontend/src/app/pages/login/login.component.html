@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>{{ "login.title" | translate }}</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+        {{ "login.username" | translate }}
+      <input type="text" formControlName="username" />
+    </label>
+    <label>
+        {{ "login.password" | translate }}
+      <input type="password" formControlName="password" />
+    </label>
+    <button type="submit" [disabled]="loading || form.invalid">
+        {{ "login.login" | translate }}
+    </button>
+  </form>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>

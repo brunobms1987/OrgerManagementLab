@@ -1,0 +1,28 @@
+logging:
+  level:
+    root: INFO
+server:
+  port: 8092
+  servlet:
+    context-path: /ordermanagement/api
+spring:
+  application:
+    name: OrderManagement
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ordermanagement
+    username: db_user
+    password: db_password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: classpath:db/master.xml
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+public-endpoints: "/v3/**;/swagger-ui/**;/swagger-ui.html"

@@ -1,0 +1,11 @@
+<header class="header">
+  <a class="brand" routerLink="/">Order Management</a>
+  <button *ngIf="loggedIn" class="logout" (click)="logout()">Logout</button>
+  <a *ngIf="!loggedIn" class="login-link" routerLink="/login">Login</a>
+</header>
+<main class="main">
+  <div class="content">
+    <router-outlet />
+  </div>
+</main>
+
