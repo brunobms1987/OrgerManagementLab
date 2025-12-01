@@ -1,6 +1,5 @@
 package lab25.ordermanagement.articles.services;
 
-import jakarta.transaction.Transactional;
 import lab25.ordermanagement.articles.dto.ArticleDTO;
 import lab25.ordermanagement.articles.dto.ArticleUpdateDTO;
 import lab25.ordermanagement.articles.mapper.ArticleMapper;
@@ -11,39 +10,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArticleUpdateService {
+public class ArticleCreateService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
     private final ArticlePolicy articlePolicy;
 
-    public ArticleUpdateService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticlePolicy articlePolicy) {
+    public ArticleCreateService(ArticleRepository articleRepository, ArticleMapper articleMapper, ArticlePolicy articlePolicy) {
         this.articleRepository = articleRepository;
         this.articleMapper = articleMapper;
         this.articlePolicy = articlePolicy;
     }
 
-    @Transactional
-    public ArticleDTO updateArticle(Long articleId, ArticleUpdateDTO articleUpdateDTO) {
-        ArticleEntity article = articleRepository.findById(articleId).orElseThrow();
-        articlePolicy.assertCanUpdate(article);
-
-        articleMapper.updateFromDTO(articleUpdateDTO, article);
-
-        articleRepository.save(article);
-
-        return articleMapper.toDTO(article);
-    }
-
-    @Transactional
     public ArticleDTO createArticle(ArticleUpdateDTO createDto) {
-        ArticleEntity newArticle = articleMapper.createFromDTO(createDto);
-
-        articlePolicy.canCreate(
-                newArticle,
-                SecurityContextHolder.getContext().getAuthentication()
-        );
-
-        ArticleEntity saved = articleRepository.save(newArticle);
+        ArticleEntity createArticleEntity = articleMapper.createFromDTO(createDto);
+        articlePolicy.canCreate(createArticleEntity, SecurityContextHolder.getContext().getAuthentication());
+        ArticleEntity saved = articleRepository.save(createArticleEntity);
         return articleMapper.toDTO(saved);
     }
+
 }

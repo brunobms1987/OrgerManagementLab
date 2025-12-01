@@ -57,4 +57,9 @@ public class ArticleEntity extends BaseEntity {
         this.description = description;
         return this;
     }
+
+    public ArticleEntity setId(long l) {
+        this.id = l;
+        return this;
+    }
 }

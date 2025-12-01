@@ -1,0 +1,47 @@
+{
+  "enums": {
+    "articleType": {
+      "PHYSICAL_PRODUCT": "Produto físico",
+      "DIGITAL_PRODUCT": "Produto digital"
+    }
+  },
+  "articles": {
+    "details": {
+      "title": "Detalhes do Artigo",
+      "name": "Nome do Artigo",
+      "articleNumber": "Número do Artigo",
+      "type": "Tipo do Artigo",
+      "description": "Descrição do Artigo",
+      "id": "ID do Artigo",
+      "edit": "Editar Artigo",
+      "editTitle": "Editar Artigo",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "updating": "Salvando...",
+      "updateError": "Falha ao salvar artigo"
+    },
+    "list": {
+      "title": "Artigos",
+      "id": "ID",
+      "name": "Nome",
+      "articleNumber": "Número do Artigo",
+      "type": "Tipo",
+      "loading": "Carregando artigos...",
+      "no_articles": "Nenhum artigo encontrado",
+      "createButton": "Criar artigo"
+    },
+    "create": {
+      "title": "Criar Novo Artigo",
+      "submit": "Criar",
+      "cancel": "Cancelar",
+      "error": "Falha ao criar artigo"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Usuário",
+    "password": "Senha",
+    "login": "Entrar",
+    "back": "Voltar"
+  }
+}

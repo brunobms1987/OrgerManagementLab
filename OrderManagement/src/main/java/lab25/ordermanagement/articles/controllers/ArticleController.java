@@ -36,4 +36,9 @@ public class ArticleController {
     public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long articleId, @RequestBody ArticleUpdateDTO dto) {
         return ResponseEntity.ok(articleUpdateService.updateArticle(articleId, dto));
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<ArticleDTO> createArticle(@RequestBody ArticleUpdateDTO dto) {
+        return ResponseEntity.ok(articleUpdateService.createArticle(dto));
+    }
 }

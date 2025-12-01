@@ -137,4 +137,102 @@ public class ArticleRequestTest extends BaseTest {
             assertEquals("new description", article.getDescription());
         });
     }
+
+    @Test
+    void createArticle_returnsUnauthorizedWhenNotAuthenticated() throws Exception {
+        String requestBody = """
+                {
+                    "type": "PHYSICAL_PRODUCT",
+                    "name": "Anonymous Article",
+                    "articleNumber": "ANON-001",
+                    "description": "Should not be created"
+                }
+                """;
+
+        mockMvc.perform(post("/articles/create")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "user", roles = {"USER"})
+    void createArticle_returnsForbiddenWhenRegularUser() throws Exception {
+        String requestBody = """
+                {
+                    "type": "PHYSICAL_PRODUCT",
+                    "name": "User Tried To Create",
+                    "articleNumber": "USER-001",
+                    "description": "Regular user should not be allowed"
+                }
+                """;
+
+        mockMvc.perform(post("/articles/create")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isForbidden());
+
+        // Database should remain unchanged
+        assertEquals(2, articleRepository.count());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    void createArticle_createsArticleSuccessfullyWhenAdmin() throws Exception {
+        String requestBody = """
+                {
+                    "type": "DIGITAL_PRODUCT",
+                    "name": "Premium Online Course",
+                    "articleNumber": "DIG-2025",
+                    "description": "High-value digital product"
+                }
+                """;
+
+        mockMvc.perform(post("/articles/create")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Premium Online Course"))
+                .andExpect(jsonPath("$.type").value("DIGITAL_PRODUCT"))
+                .andExpect(jsonPath("$.articleNumber").value("DIG-2025"))
+                .andExpect(jsonPath("$.description").value("High-value digital product"))
+                .andExpect(jsonPath("$.id").isNotEmpty());
+
+        assertEquals(3, articleRepository.count());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    void createArticle_returnsBadRequestWhenRequiredFieldsAreMissing() throws Exception {
+        String invalidBody = """
+                {
+                    "type": "PHYSICAL_PRODUCT",
+                    "articleNumber": "MISS-001"
+                    // name is missing
+                }
+                """;
+
+        mockMvc.perform(post("/articles/create")
+                        .contentType("application/json")
+                        .content(invalidBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    void createArticle_returnsBadRequestWhenArticleNumberAlreadyExists() throws Exception {
+        String requestBody = """
+                {
+                    "type": "PHYSICAL_PRODUCT",
+                    "name": "Duplicate Number",
+                    "articleNumber": "12345",
+                    "description": "Should conflict with existing articleNumber"
+                }
+                """;
+
+        mockMvc.perform(post("/articles/create")
+                        .contentType("application/json")
+                        .content(requestBody))
+                .andExpect(status().isBadRequest()); // or .isConflict() if you prefer 409
+    }
 }

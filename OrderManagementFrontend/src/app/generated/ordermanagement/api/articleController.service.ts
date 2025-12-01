@@ -9,12 +9,13 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
-        }       from '@angular/common/http';
-import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+import { Inject, Injectable, Optional } from '@angular/core';
+import {
+    HttpClient, HttpHeaders, HttpParams,
+    HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
+} from '@angular/common/http';
+import { CustomHttpParameterCodec } from '../encoder';
+import { Observable } from 'rxjs';
 
 // @ts-ignore
 import { ArticleDTO } from '../model/articleDTO';
@@ -24,8 +25,8 @@ import { ArticleUpdateDTO } from '../model/articleUpdateDTO';
 import { PageArticleDTO } from '../model/pageArticleDTO';
 
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
+import { Configuration } from '../configuration';
 import { BaseService } from '../api.base.service';
 
 
@@ -49,11 +50,11 @@ export interface UpdateArticleRequestParams {
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ArticleControllerService extends BaseService {
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string|string[], @Optional() configuration?: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string | string[], @Optional() configuration?: Configuration) {
         super(basePath, configuration);
     }
 
@@ -62,10 +63,10 @@ export class ArticleControllerService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ArticleDTO>;
-    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ArticleDTO>>;
-    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ArticleDTO>>;
-    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<ArticleDTO>;
+    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpResponse<ArticleDTO>>;
+    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpEvent<ArticleDTO>>;
+    public getArticleById(requestParameters: GetArticleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<any> {
         const articleId = requestParameters?.articleId;
         if (articleId === null || articleId === undefined) {
             throw new Error('Required parameter articleId was null or undefined when calling getArticleById.');
@@ -96,7 +97,7 @@ export class ArticleControllerService extends BaseService {
             }
         }
 
-        let localVarPath = `/articles/${this.configuration.encodeParam({name: "articleId", value: articleId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/articles/${this.configuration.encodeParam({ name: "articleId", value: articleId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64" })}`;
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<ArticleDTO>('get', `${basePath}${localVarPath}`,
             {
@@ -116,23 +117,23 @@ export class ArticleControllerService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<PageArticleDTO>;
-    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<PageArticleDTO>>;
-    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<PageArticleDTO>>;
-    public listArticles(requestParameters?: ListArticlesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<PageArticleDTO>;
+    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpResponse<PageArticleDTO>>;
+    public listArticles(requestParameters?: ListArticlesRequestParams, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpEvent<PageArticleDTO>>;
+    public listArticles(requestParameters?: ListArticlesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<any> {
         const page = requestParameters?.page;
         const size = requestParameters?.size;
         const sort = requestParameters?.sort;
 
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-          <any>page, 'page');
+            <any>page, 'page');
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-          <any>size, 'size');
+            <any>size, 'size');
         if (sort) {
             sort.forEach((element) => {
                 localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-                  <any>element, 'sort');
+                    <any>element, 'sort');
             })
         }
 
@@ -182,10 +183,10 @@ export class ArticleControllerService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ArticleDTO>;
-    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ArticleDTO>>;
-    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ArticleDTO>>;
-    public updateArticle(requestParameters: UpdateArticleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<ArticleDTO>;
+    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpResponse<ArticleDTO>>;
+    public updateArticle(requestParameters: UpdateArticleRequestParams, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<HttpEvent<ArticleDTO>>;
+    public updateArticle(requestParameters: UpdateArticleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean }): Observable<any> {
         const articleId = requestParameters?.articleId;
         if (articleId === null || articleId === undefined) {
             throw new Error('Required parameter articleId was null or undefined when calling updateArticle.');
@@ -229,7 +230,7 @@ export class ArticleControllerService extends BaseService {
             }
         }
 
-        let localVarPath = `/articles/${this.configuration.encodeParam({name: "articleId", value: articleId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/articles/${this.configuration.encodeParam({ name: "articleId", value: articleId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64" })}`;
         const { basePath, withCredentials } = this.configuration;
         return this.httpClient.request<ArticleDTO>('post', `${basePath}${localVarPath}`,
             {
@@ -241,6 +242,43 @@ export class ArticleControllerService extends BaseService {
                 observe: observe,
                 transferCache: localVarTransferCache,
                 reportProgress: reportProgress
+            }
+        );
+    }
+
+    public createArticleUsingPOST(requestParameters: { articleUpdateDTO: ArticleUpdateDTO }, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext }): Observable<ArticleDTO>;
+    public createArticleUsingPOST(requestParameters: { articleUpdateDTO: ArticleUpdateDTO }, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext }): Observable<HttpResponse<ArticleDTO>>;
+    public createArticleUsingPOST(requestParameters: { articleUpdateDTO: ArticleUpdateDTO }, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext }): Observable<HttpEvent<ArticleDTO>>;
+    public createArticleUsingPOST(requestParameters: { articleUpdateDTO: ArticleUpdateDTO }, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json', context?: HttpContext }): Observable<any> {
+        const { articleUpdateDTO } = requestParameters;
+        if (!articleUpdateDTO) {
+            throw new Error('Required parameter articleUpdateDTO was null or undefined when calling createArticleUsingPOST.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        const httpHeaderAcceptSelected: string | undefined = options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept(['application/json']);
+        if (httpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        const consumes: string[] = ['application/json'];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        const context = options?.context ?? new HttpContext();
+
+        return this.httpClient.post<ArticleDTO>(
+            `${this.configuration.basePath ?? ''}/articles/create`,
+            articleUpdateDTO,
+            {
+                context,
+                headers: localVarHeaders,
+                observe,
+                reportProgress,
+                withCredentials: this.configuration.withCredentials
             }
         );
     }

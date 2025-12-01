@@ -4,6 +4,7 @@ import lab25.ordermanagement.articles.dto.ArticleDTO;
 import lab25.ordermanagement.articles.dto.ArticleUpdateDTO;
 import lab25.ordermanagement.articles.models.ArticleEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -16,4 +17,7 @@ public interface ArticleMapper {
     ArticleDTO toDTO(ArticleEntity entity);
 
     ArticleEntity updateFromDTO(ArticleUpdateDTO dto, @MappingTarget ArticleEntity entity);
+
+    @Mapping(target = "id", ignore = true)
+    ArticleEntity createFromDTO(ArticleUpdateDTO dto);
 }

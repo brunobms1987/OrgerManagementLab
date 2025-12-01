@@ -27,7 +27,14 @@
       "articleNumber": "Article Number",
       "type": "Article Type",
       "loading": "Loading articles...",
-      "no_articles": "No articles found"
+      "no_articles": "No articles found",
+      "createButton": "Create article"
+    },
+    "create": {
+      "title": "Create New Article",
+      "submit": "Create",
+      "cancel": "Cancel",
+      "error": "Failed to create article"
     }
   },
   "login": {

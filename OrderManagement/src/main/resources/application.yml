@@ -10,8 +10,8 @@ spring:
     name: OrderManagement
   datasource:
     url: jdbc:postgresql://localhost:5432/ordermanagement
-    username: db_user
-    password: db_password
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: validate

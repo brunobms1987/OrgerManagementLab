@@ -1,4 +1,10 @@
-<h1>{{ "articles.list.title" | translate }}</h1>
+<div class="header">
+  <h1>{{ "articles.list.title" | translate }}</h1>
+  <button mat-raised-button color="primary" (click)="openCreateDialog()" *ngIf="isAdmin()">
+    {{ "articles.list.createButton" | translate }}
+  </button>
+</div>
+
 <div *ngIf="loading">{{ "articles.list.loading" | translate }}</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
